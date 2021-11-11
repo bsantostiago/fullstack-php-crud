@@ -7,13 +7,7 @@ $fabricante = new Fabricante;
 
 // Obtendo a relação de fabricantes via método
 $listaDeFabricantes = $fabricante->lerFabricantes();
-
 ?>
-
-<pre>
-<?=var_dump($listaDeFabricantes)?>
-</pre>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,10 +32,23 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
     <table>
         <caption> Lista de Fabricantes </caption>
         <thead>
-            <th>ID</th>
-            <th>Nome</th>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
         </thead>
                 
+        <tbody>
+
+<?php foreach( $listaDeFabricantes as $arrFabricante ){ ?>
+            <tr>
+                <td> <?=$arrFabricante['id']?> </td>
+                <td> <?=$arrFabricante['nome']?> </td>
+            </tr>
+<?php } ?>
+
+        </tbody>
+
     </table>
  
 </div>

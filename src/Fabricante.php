@@ -13,7 +13,7 @@ class Fabricante {
         $this->conexao = Banco::conecta();
     }
 
-    public function lerFabricantes(){
+    public function lerFabricantes():array {
         // 1) Montar a consulta SQL
         $sql = "SELECT * FROM fabricantes ORDER BY nome";
 
@@ -24,12 +24,39 @@ class Fabricante {
             // 3) Executar a consulta
             $consulta->execute();
 
-            // 4) Capturar os resultados da consulta
+            // 4) Capturar os resultados da consulta como array
             $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
         } catch(Exception $erro){
             die("Erro: ".$erro->getMessage());
         }
 
         return $resultado;
-    } // fim lerFabricantes    
+    } // fim lerFabricantes   
+    
+
+    
+    public function inserirFabricante(string $nome){
+        $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
+
+        /* Prepared Statements (Declarações/Processos preparados) */
+
+        try{
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $consulta->execute();
+        } catch(Exception $erro){
+            die("Erro: ".$erro->getMessage());
+        }
+    } // fim inserirFabricante
+
+    
+    /* Getters e Setters para o acesso das propriedades */
+    public function getNome():string{
+        return $this->nome;
+    }
+
+    public function setNome(string $nome){
+        $this->nome = filter_var($nome, FILTER_SANITIZE_STRING);
+    }
+
 } // fim Fabricante
