@@ -4,10 +4,14 @@ require "../src/Fabricante.php";
 
 // Criando um objeto para fabricante
 $fabricante = new Fabricante;
+
+// Obtendo a relação de fabricantes via método
+$listaDeFabricantes = $fabricante->lerFabricantes();
+
 ?>
 
 <pre>
-<?=var_dump($fabricante)?>
+<?=var_dump($listaDeFabricantes)?>
 </pre>
 
 <!DOCTYPE html>
