@@ -1,3 +1,15 @@
+<?php
+// Importando a classe Fabricante
+require "../src/Fabricante.php";
+
+// Criando um objeto para fabricante
+$fabricante = new Fabricante;
+?>
+
+<pre>
+<?=var_dump($fabricante)?>
+</pre>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

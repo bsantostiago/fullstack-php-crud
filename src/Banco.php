@@ -3,7 +3,7 @@ abstract class Banco {
     // Atributo/Propriedade de conexão
     private static PDO $conexao;
 
-    public static function conecta(){
+    public static function conecta():PDO{
         /* Parâmetros para conexão ao servidor de BD */
         $servidor = "localhost";
         $usuario = "root";
@@ -31,4 +31,4 @@ abstract class Banco {
 } // fim Banco
 
 // Teste (depois apagaremos a linha abaixo):
-Banco::conecta();
+//Banco::conecta();
