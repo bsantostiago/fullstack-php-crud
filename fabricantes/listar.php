@@ -35,6 +35,7 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Operação</th>
             </tr>
         </thead>
                 
@@ -44,6 +45,9 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
             <tr>
                 <td> <?=$arrFabricante['id']?> </td>
                 <td> <?=$arrFabricante['nome']?> </td>
+                <td>
+                    <a href="atualizar.php?id=<?=$arrFabricante['id']?>">Atualizar</a>
+                </td>
             </tr>
 <?php } ?>
 

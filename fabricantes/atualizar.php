@@ -1,3 +1,22 @@
+<?php
+// Importamos a classe Fabricante
+require_once "../src/Fabricante.php";
+
+// Para poder usar recursos da classe, instanciamos um objeto
+$fabricante = new Fabricante;
+
+// Atribuimos ao objeto (via setter) o valor do ID vindo do parâmetro de URL
+$fabricante->setId($_GET['id']);
+
+// Executamos o método lerUmFabricante e guardamos o array com os dados retornados
+$dados = $fabricante->lerUmFabricante();
+
+if( isset($_POST['atualizar']) ){
+    $fabricante->setNome($_POST['nome']);
+    $fabricante->atualizarFabricante();
+    header("location:listar.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,7 +40,8 @@
 
 	    <p>
             <label for="nome">Nome:</label><br>
-	        <input type="text" name="nome" id="nome" required>
+	        <input value="<?=$dados['nome']?>"
+             type="text" name="nome" id="nome" required>
         </p>   
         <button name="atualizar">Atualizar fabricante</button>
 	</form>	

@@ -35,14 +35,13 @@ class Fabricante {
     
 
     
-    public function inserirFabricante(string $nome){
+    public function inserirFabricante(){
         $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
 
         /* Prepared Statements (Declarações/Processos preparados) */
-
         try{
             $consulta = $this->conexao->prepare($sql);
-            $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $consulta->bindParam(':nome', $this->nome, PDO::PARAM_STR);
             $consulta->execute();
         } catch(Exception $erro){
             die("Erro: ".$erro->getMessage());
@@ -50,9 +49,47 @@ class Fabricante {
     } // fim inserirFabricante
 
     
+    public function lerUmFabricante(){
+        $sql = "SELECT * FROM fabricantes WHERE id = :id";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        } catch(Exception $erro) {
+            die("Erro: ".$erro->getMessage());
+        }
+
+        return $resultado;
+    } // fim lerUmFabricante
+
+
+    public function atualizarFabricante(){
+        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $consulta->bindParam(':nome', $this->nome, PDO::PARAM_STR);
+            $consulta->execute();
+        } catch(Exception $erro) {
+            die("Erro: ".$erro->getMessage());
+        }
+    } // fim atualizarFabricante
+
+
+
+
     /* Getters e Setters para o acesso das propriedades */
+    public function getId():int{
+        return $this->id;
+    }
+
     public function getNome():string{
         return $this->nome;
+    }
+
+    public function setId(int $id){
+        $this->id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function setNome(string $nome){
