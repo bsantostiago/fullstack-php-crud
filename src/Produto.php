@@ -16,6 +16,22 @@ class Produto {
         $this->conexao = Banco::conecta();
     }
 
+    public function lerProdutos():array {
+        $sql = "SELECT * FROM produtos ORDER BY nome";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->execute();
+            $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die( "Erro: " .$erro->getMessage());
+        }
+        return $resultado;
+    } // fim lerProdutos
+
+
+
+
 
     /* Getters */
     public function getId():int { return $this->id; }
@@ -33,7 +49,9 @@ class Produto {
         $this->nome = filter_var($nome, FILTER_SANITIZE_STRING);
     }
     public function setPreco(float $preco) {
-        $this->preco = filter_var($preco, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $this->preco = filter_var(
+            $preco, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION
+        );
     }
     public function setQuantidade(int $quantidade) {
         $this->quantidade = filter_var($quantidade, FILTER_SANITIZE_NUMBER_INT);

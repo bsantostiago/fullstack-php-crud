@@ -1,3 +1,8 @@
+<?php
+require_once "../src/Produto.php";
+$produto = new Produto;
+$listaDeProdutos = $produto->lerProdutos();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,7 +22,20 @@
     
     <h2>Lendo e carregando todos os produtos</h2>
     <p><a href="inserir.php">Inserir</a></p>  
-        
+
+<?php foreach($listaDeProdutos as $dadosProduto) { ?>
+    <ul>
+        <li><b>Nome:</b> <?=$dadosProduto['nome']?> </li>
+        <li><b>Preço:</b> <?=$dadosProduto['preco']?> </li>
+        <li><b>Quantidade:</b> 
+        <?=$dadosProduto['quantidade']?> </li>
+        <li><b>Descrição:</b> 
+        <?=$dadosProduto['descricao']?>  </li>
+        <li><b>Fabricante:</b> 
+        <?=$dadosProduto['fabricante_id']?> 
+        </li>
+    </ul>
+<?php } ?>
 
 </div>
 
