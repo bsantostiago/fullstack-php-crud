@@ -46,7 +46,8 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
                 <td> <?=$arrFabricante['id']?> </td>
                 <td> <?=$arrFabricante['nome']?> </td>
                 <td>
-                    <a href="atualizar.php?id=<?=$arrFabricante['id']?>">Atualizar</a>
+    <a href="atualizar.php?id=<?=$arrFabricante['id']?>">Atualizar</a>
+    <a href="excluir.php?id=<?=$arrFabricante['id']?>">Excluir</a>
                 </td>
             </tr>
 <?php } ?>

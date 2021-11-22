@@ -77,6 +77,19 @@ class Fabricante {
     } // fim atualizarFabricante
 
 
+    public function excluirFabricante(){
+        $sql = "DELETE FROM fabricantes WHERE id = :id";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch(Exception $erro){
+            die("Erro: " .$erro->getMessage());
+        }
+    } // fim excluirFabricante
+
+
+
 
 
     /* Getters e Setters para o acesso das propriedades */
