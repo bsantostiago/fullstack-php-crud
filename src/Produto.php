@@ -17,7 +17,18 @@ class Produto {
     }
 
     public function lerProdutos():array {
-        $sql = "SELECT * FROM produtos ORDER BY nome";
+        // Versão 1: dados apenas da tabela produtos
+        // $sql = "SELECT * FROM produtos ORDER BY nome";
+
+        // Versão 2: dados das duas tabelas usando JOIN
+        $sql = "SELECT produtos.nome AS produto, produtos.*, fabricantes.nome AS fabricante 
+                FROM produtos INNER JOIN fabricantes 
+                ON fabricantes.id = produtos.fabricante_id ORDER BY produto";
+
+        /* $sql = "SELECT produtos.nome AS produto, produtos.preco, produtos.quantidade, 
+                produtos.descricao, fabricantes.nome AS fabricante
+                FROM produtos INNER JOIN fabricantes 
+                ON fabricantes.id = produtos.fabricante_id ORDER BY produto"; */
 
         try {
             $consulta = $this->conexao->prepare($sql);

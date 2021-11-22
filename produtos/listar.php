@@ -32,7 +32,7 @@ $listaDeProdutos = $produto->lerProdutos();
         <li><b>Descrição:</b> 
         <?=$dadosProduto['descricao']?>  </li>
         <li><b>Fabricante:</b> 
-        <?=$dadosProduto['fabricante_id']?> 
+        <?=$dadosProduto['fabricante']?> 
         </li>
     </ul>
 <?php } ?>
