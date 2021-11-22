@@ -1,4 +1,4 @@
-<?php
+<?php /* Scripts de fabricante concluídos */
 require_once "Banco.php";
 
 class Fabricante {
