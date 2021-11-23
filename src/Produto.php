@@ -48,10 +48,11 @@ class Produto {
         try {
             $consulta = $this->conexao->prepare($sql);
             $consulta->bindParam(":nome", $this->nome, PDO::PARAM_STR);
-            $consulta->bindParam(":preco", $this->preco, PDO::PARAM_STR); // *
+            $consulta->bindParam(":preco", $this->preco, PDO::PARAM_STR); 
             $consulta->bindParam(":quantidade", $this->quantidade, PDO::PARAM_INT);
             $consulta->bindParam(":descricao", $this->descricao, PDO::PARAM_STR);
             $consulta->bindParam(":fabricante_id", $this->fabricanteId, PDO::PARAM_INT);
+            $consulta->execute();
         } catch (Exception $erro) {
             die( "Erro: " .$erro->getMessage());
         }
