@@ -1,3 +1,23 @@
+<?php
+require_once "../src/Produto.php";
+require_once "../src/Fabricante.php";
+
+$produto = new Produto;
+$fabricante = new Fabricante;
+$listaDeFabricantes = $fabricante->lerFabricantes();
+
+if( isset($_POST['inserir']) ){
+    $produto->setNome($_POST['nome']);
+    $produto->setPreco($_POST['preco']);
+    $produto->setQuantidade($_POST['quantidade']);
+    $produto->setDescricao($_POST['descricao']);
+    $produto->setFabricanteId($_POST['fabricante']);
+
+    $produto->inserirProduto();
+
+    header("location:listar.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -36,10 +56,16 @@
         <p>
             <label for="fabricante">Fabricante:</label>
             <select name="fabricante" id="fabricante" required>
+                <!-- Primeiro option é estático e vazio
+                (deixa do jeito que está) -->
                 <option value=""></option>
-                <option value="1">Fabricante 1...</option>
-                <option value="2">Fabricante 2...</option>
-                <option value="3">Fabricante 3...</option>
+
+                <?php foreach( $listaDeFabricantes as $dadosFabricante ) { ?>
+                    <option value="<?=$dadosFabricante['id']?>">
+                    <?=$dadosFabricante['nome']?>
+                    </option>
+                <?php } ?>
+                
             </select>
         </p>
 
