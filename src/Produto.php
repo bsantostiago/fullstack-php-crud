@@ -21,7 +21,8 @@ class Produto {
         // $sql = "SELECT * FROM produtos ORDER BY nome";
 
         // Versão 2: dados das duas tabelas usando JOIN
-        $sql = "SELECT produtos.nome AS produto, produtos.*, fabricantes.nome AS fabricante 
+        $sql = "SELECT produtos.nome AS produto, produtos.*, 
+                        fabricantes.nome AS fabricante 
                 FROM produtos INNER JOIN fabricantes 
                 ON fabricantes.id = produtos.fabricante_id ORDER BY produto";
 
@@ -41,6 +42,27 @@ class Produto {
     } // fim lerProdutos
 
 
+    public function inserirProduto(){
+        $sql = "INSERT INTO produtos(nome, preco, quantidade, descricao, fabricante_id) VALUES(:nome, :preco, :quantidade, :descricao, :fabricante_id)";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(":nome", $this->nome, PDO::PARAM_STR);
+            $consulta->bindParam(":preco", $this->preco, PDO::PARAM_STR); // *
+            $consulta->bindParam(":quantidade", $this->quantidade, PDO::PARAM_INT);
+            $consulta->bindParam(":descricao", $this->descricao, PDO::PARAM_STR);
+            $consulta->bindParam(":fabricante_id", $this->fabricanteId, PDO::PARAM_INT);
+        } catch (Exception $erro) {
+            die( "Erro: " .$erro->getMessage());
+        }
+    }
+
+
+
+    /* Utilitários */
+    public function formataPreco(float $preco):string {
+        return "R$ ".number_format( $preco, 2, ",", "." );
+    }
 
 
 

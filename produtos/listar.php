@@ -26,7 +26,9 @@ $listaDeProdutos = $produto->lerProdutos();
 <?php foreach($listaDeProdutos as $dadosProduto) { ?>
     <ul>
         <li><b>Nome:</b> <?=$dadosProduto['nome']?> </li>
-        <li><b>Preço:</b> <?=$dadosProduto['preco']?> </li>
+        <li><b>Preço:</b> 
+        <?=$produto->formataPreco($dadosProduto['preco'])?> 
+        </li>
         <li><b>Quantidade:</b> 
         <?=$dadosProduto['quantidade']?> </li>
         <li><b>Descrição:</b> 
