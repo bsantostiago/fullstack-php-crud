@@ -1,2 +1,2 @@
 # fullstack-php-crud
-Programação PHP para manipulação CRUD de dados usando SQL.
+Programação PHP com orientação a objetos para manipulação CRUD de dados usando SQL.
