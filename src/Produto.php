@@ -95,6 +95,17 @@ class Produto {
     } // fim atualizarProduto
 
 
+    public function excluirProduto(){
+        $sql = "DELETE FROM produtos WHERE id = :id";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die( "Erro: " .$erro->getMessage());
+        }
+    } // fim excluirProduto
+
 
     /* Utilitários */
     public function formataPreco(float $preco):string {
