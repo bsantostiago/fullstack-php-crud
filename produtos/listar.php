@@ -38,7 +38,8 @@ $listaDeProdutos = $produto->lerProdutos();
         </li>
     </ul>
 
-    <a href="atualizar.php?id=<?=$dadosProduto['id']?>">Atualizar</a>
+    <a href="atualizar.php?id=<?=$dadosProduto['id']?>">Atualizar</a> - 
+    <a href="excluir.php?id=<?=$dadosProduto['id']?>">Excluir</a>
 
 <?php } ?>
 
