@@ -76,8 +76,22 @@ class Produto {
 
 
     public function atualizarProduto(){
-        // SQL UPDATE
-
+        $sql = "UPDATE produtos SET nome = :nome, preco = :preco,
+        quantidade = :quantidade, descricao = :descricao,
+        fabricante_id = :fabricante_id WHERE id = :id";
+        
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $consulta->bindParam(':nome', $this->nome, PDO::PARAM_STR);
+            $consulta->bindParam(':preco', $this->preco, PDO::PARAM_STR);
+            $consulta->bindParam(':quantidade', $this->quantidade, PDO::PARAM_INT);
+            $consulta->bindParam(':descricao', $this->descricao, PDO::PARAM_STR);
+            $consulta->bindParam(':fabricante_id', $this->fabricanteId, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die( "Erro: " .$erro->getMessage());
+        }
     } // fim atualizarProduto
 
 
