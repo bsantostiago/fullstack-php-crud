@@ -1,3 +1,26 @@
+<?php
+require_once "../src/Produto.php";
+require_once "../src/Fabricante.php";
+
+$produto = new Produto;
+$fabricante = new Fabricante;
+
+$listaDeFabricantes = $fabricante->lerFabricantes();
+
+$produto->setId($_GET['id']);
+$dados = $produto->lerUmProduto();
+
+if(isset($_POST['atualizar'])){
+    $produto->setNome($_POST['nome']);
+    $produto->setPreco($_POST['preco']);
+    $produto->setQuantidade($_POST['quantidade']);
+    $produto->setDescricao($_POST['descricao']);
+    $produto->setFabricanteId($_POST['fabricante']);
+
+    $produto->atualizarProduto();
+    header("location:listar.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,35 +41,44 @@
     <h2>Utilize o formulário abaixo para atualizar os dados de um produto.</h2>
     
     <form action="#" method="post">
-        
+        <!-- EXERCÍCIO: FAÇA OS DADOS DO PRODUTO
+        APARECEM EM CADA CAMPO DO FORMULÁRIO -->
         <p>
             <label for="nome">Nome:</label>
-	        <input type="text" name="nome" id="nome" required>
+	        <input value="<?=$dados['nome']?>" type="text" name="nome" id="nome" required>
         </p>
 
         <p>
             <label for="preco">Preço:</label>
-	        <input type="number" name="preco" id="preco" min="0" max="15000" step="0.01" required>
+	        <input value="<?=$dados['preco']?>" type="number" name="preco" id="preco" min="0" max="15000" step="0.01" required>
         </p>
 
         <p>
             <label for="quantidade">Quantidade:</label>
-	        <input type="number" name="quantidade" id="quantidade" min="0" max="100" step="1" required>
+	        <input value="<?=$dados['quantidade']?>" type="number" name="quantidade" id="quantidade" min="0" max="100" step="1" required>
         </p>
 
         <p>
             <label for="fabricante">Fabricante:</label>
             <select name="fabricante" id="fabricante" required>
                 <option value=""></option>
-                <option value="1">Fabricante 1...</option>
-                <option value="2">Fabricante 2...</option>
-                <option value="3">Fabricante 3...</option>
+
+            <?php foreach($listaDeFabricantes as $dadosFabricante) { ?>
+                <!-- Se a coluna ID da tabela fabricantes for igual a 
+                coluna fabricante_id da tabela produtos, então habilite o 
+                atributo selected para o option -->
+                <option 
+                <?php if( $dadosFabricante['id'] == $dados['fabricante_id'] ) echo "selected"; ?>
+                value="<?=$dadosFabricante['id']?>">
+                    <?=$dadosFabricante['nome']?>
+                </option>
+            <?php } ?>   
             </select>
         </p>
     
 	    <p>
             <label for="descricao">Descrição:</label>
-	        <textarea name="descricao" id="descricao" rows="3" cols="40" maxlength="500" required></textarea>
+	        <textarea name="descricao" id="descricao" rows="3" cols="40" maxlength="500" required><?=$dados['descricao']?></textarea>
         </p>
 	    
         <button name="atualizar">Atualizar produto</button>

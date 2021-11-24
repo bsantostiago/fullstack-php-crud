@@ -37,6 +37,9 @@ $listaDeProdutos = $produto->lerProdutos();
         <?=$dadosProduto['fabricante']?> 
         </li>
     </ul>
+
+    <a href="atualizar.php?id=<?=$dadosProduto['id']?>">Atualizar</a>
+
 <?php } ?>
 
 </div>

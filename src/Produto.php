@@ -56,7 +56,29 @@ class Produto {
         } catch (Exception $erro) {
             die( "Erro: " .$erro->getMessage());
         }
-    }
+    } // fim inserirProduto
+
+
+    public function lerUmProduto(){
+        // SQL SELECT
+        $sql = "SELECT * FROM produtos WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(":id", $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $erro) {
+            die( "Erro: " .$erro->getMessage());
+        }
+        return $resultado;        
+    } // fim lerUmProduto
+
+
+    public function atualizarProduto(){
+        // SQL UPDATE
+
+    } // fim atualizarProduto
 
 
 
