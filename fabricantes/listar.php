@@ -14,6 +14,7 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> Fabricantes | SELECT - CRUD com PHP e MySQL </title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -27,15 +28,15 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
 <div class="container">
     
     <h2>Lendo e carregando todos os fabricantes</h2>
-    <p><a href="inserir.php">Inserir</a></p>    
+    <p><a class="btn btn-primary" href="inserir.php">Inserir</a></p>    
 
-    <table>
+    <table class="table table-striped table-hover">
         <caption> Lista de Fabricantes </caption>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Operação</th>
+                <th class="text-center">Operação</th>
             </tr>
         </thead>
                 
@@ -45,9 +46,9 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
             <tr>
                 <td> <?=$arrFabricante['id']?> </td>
                 <td> <?=$arrFabricante['nome']?> </td>
-                <td>
-    <a href="atualizar.php?id=<?=$arrFabricante['id']?>">Atualizar</a>
-    <a href="excluir.php?id=<?=$arrFabricante['id']?>">Excluir</a>
+                <td class="text-center">
+    <a class="btn btn-warning" href="atualizar.php?id=<?=$arrFabricante['id']?>">Atualizar</a>
+    <a class="btn btn-danger" href="excluir.php?id=<?=$arrFabricante['id']?>">Excluir</a>
                 </td>
             </tr>
 <?php } ?>
@@ -57,6 +58,10 @@ $listaDeFabricantes = $fabricante->lerFabricantes();
     </table>
  
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

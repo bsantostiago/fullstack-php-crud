@@ -9,6 +9,7 @@ $listaDeProdutos = $produto->lerProdutos();
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Produtos | SELECT - CRUD com PHP e MySQL </title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -21,30 +22,44 @@ $listaDeProdutos = $produto->lerProdutos();
 <div class="container">
     
     <h2>Lendo e carregando todos os produtos</h2>
-    <p><a href="inserir.php">Inserir</a></p>  
+    <p><a class="btn btn-primary" href="inserir.php">Inserir</a></p>  
+
+<div class="row"> <!-- inicio da div row (habilitar o grid system) -->
 
 <?php foreach($listaDeProdutos as $dadosProduto) { ?>
-    <ul>
-        <li><b>Nome:</b> <?=$dadosProduto['nome']?> </li>
-        <li><b>Preço:</b> 
+
+  <div class="col-sm-6 col-md-4"> <!-- inicio das colunas -->
+    <ul class="list-group">
+        <li class="list-group-item"><b>Nome:</b> <?=$dadosProduto['nome']?> </li>
+        <li class="list-group-item"><b>Preço:</b> 
         <?=$produto->formataPreco($dadosProduto['preco'])?> 
         </li>
-        <li><b>Quantidade:</b> 
+        <li class="list-group-item"><b>Quantidade:</b> 
         <?=$dadosProduto['quantidade']?> </li>
-        <li><b>Descrição:</b> 
+        <li class="list-group-item"><b>Descrição:</b> 
         <?=$dadosProduto['descricao']?>  </li>
-        <li><b>Fabricante:</b> 
+        <li class="list-group-item"><b>Fabricante:</b> 
         <?=$dadosProduto['fabricante']?> 
         </li>
     </ul>
 
-    <a href="atualizar.php?id=<?=$dadosProduto['id']?>">Atualizar</a> - 
-    <a href="excluir.php?id=<?=$dadosProduto['id']?>">Excluir</a>
+    <p class="text-center my-2">
+        <a class="btn btn-warning"
+         href="atualizar.php?id=<?=$dadosProduto['id']?>">Atualizar</a> 
+        <a class="btn btn-danger"
+        href="excluir.php?id=<?=$dadosProduto['id']?>">Excluir</a>
+    </p>
+
+  </div> <!-- fim das colunas -->
 
 <?php } ?>
 
+</div> <!-- fim da div row -->
+
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
